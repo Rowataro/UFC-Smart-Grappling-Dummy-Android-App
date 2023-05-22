@@ -1,0 +1,148 @@
+<Plotter>:
+    canvas.before:
+        Color:
+            rgb: [0, 0, 0, 0]
+        Rectangle:
+            size: self.size
+
+
+    BoxLayout:
+        size_hint: 1, 1
+        orientation: 'vertical'
+
+        BoxLayout:
+            size_hint: 1, .1
+            padding: 5
+
+            Label:
+                text: 'UFC Smart Grappling Dummy'
+
+        BoxLayout:
+            size_hint: 1, .1
+            padding: 5
+
+            Label:
+                text: 'Choke'
+
+            Label:
+                text: 'Armbar'
+
+            Label:
+                text: 'Strike'
+
+        BoxLayout:
+            size_hint: 1, .5
+            orientation: 'vertical'
+            padding: 5
+
+            ScrollView:
+                id: view
+                do_scroll_x: True
+                do_scroll_y: False
+                orientation: 'vertical'
+                scroll_type: ['content']
+                size_hint: 1, .5
+                bar_width: 4
+                height: self.height
+                bar_color: 256, 0, 0, 0
+                bar_inactive_color: 256, 0, 0, 0
+
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: None, 1
+                    width: view.width*root.zoom
+
+                    BoxLayout:
+                        id: graph
+
+            ScrollView:
+                id: view
+                do_scroll_x: True
+                do_scroll_y: False
+                orientation: 'vertical'
+                scroll_type: ['content']
+                size_hint: 1, .5
+                bar_width: 4
+                bar_color: 1, 1, 1, 1
+                bar_inactive_color: 1, 1, 1, 0.5
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    size_hint: None, 1
+                    width: view.width*root.zoom
+
+                    BoxLayout:
+                        id: graph
+
+            ScrollView:
+                id: view
+                do_scroll_x: True
+                do_scroll_y: False
+                orientation: 'vertical'
+                scroll_type: ['content']
+                size_hint: 1, .5
+                bar_width: 4
+                bar_color: 1, 1, 1, 1
+                bar_inactive_color: 1, 1, 1, 0.5
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    size_hint: None, 1
+                    width: view.width*root.zoom
+                    BoxLayout:
+                        id: graph
+
+            BoxLayout:
+                id: zoom1
+                size_hint: 1, .2
+                orientation: 'horizontal'
+                padding: 5
+
+                Button:
+                    text: '-'
+                    size_hint_x: None
+                    width: self.height
+                    on_release: root.update_zoom('-')
+
+                Label:
+                    text: str(root.zoom) + 'x'
+
+                Button:
+                    text: '+'
+                    size_hint_x: None
+                    width: self.height
+                    on_release: root.update_zoom('+')
+
+        BoxLayout:
+            id: pb1
+            size_hint: 1, .1
+            padding: 5
+
+            Label:
+                text: 'Session Best: ' + str(app.pb_armbar) + 'kg'
+            Label:
+                text: 'Session Best: ' + str(app.pb_choke) + 'kg'
+            Label:
+                text: 'Session Best: ' + str(app.pb_strike) + 'kg'
+
+        BoxLayout:
+            size_hint: 1, .1
+            padding: 5
+            Label:
+                text: 'Time Elapsed: ' + str(app.timer) + 's'
+
+        BoxLayout:
+            size_hint: 1, .1
+            padding: 5
+            Button:
+                id: data
+                text: 'Start'
+                on_release: app.start()
+            Button:
+                id: data
+                text: 'Pause/Unpause'
+                on_press: app.toggle_pause()
+            Button:
+                id: data
+                text: 'Clear'
+                on_release: app.clear()
